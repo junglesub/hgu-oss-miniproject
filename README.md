@@ -1,7 +1,7 @@
 **기업 수입/지출 내역 관리 프로그램**
 =============================
 #### 기업의 연간 수입/지출 내역을 손쉽게 기록하고 한눈에 보자!
-![가계부](https://lh3.googleusercontent.com/proxy/5wKJ4jx3kOW714V9SIhelI8uYPKTHMNiTybkrYNNxmIACAXimfajxR-YDptHzx04RzDAM0r4Q1-RzgbZEzj7ZxJQVVth1P175lrXGIIO3aa4wpfPLLoNuQv56a9LX7Sv5QrTlTzez44rTyzGQA)
+![가계부](https://user-images.githubusercontent.com/70666097/117020441-684fe000-ad31-11eb-8d86-91c9f7ba079c.jpg)
 
 ### Mini Project 주제
     수입/지출 내역 관리 프로그램
