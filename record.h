@@ -3,7 +3,7 @@
 
 typedef struct {
   char date[20];
-  int management_type;
+  char management_type;
   int price;
   char paymentMethod;
 } Record;
@@ -15,8 +15,8 @@ int updateRecord(Record *r[]);
 void deleteRecord(Record *r[], int count, int delIndex);
 
 // 검색 및 출력
-void searchBreakdown(Record *r[], int management_type);  // 항목별 내역 확인
-void searchPrice(Record *r[], int management_type);  // 금액별 내역 확인
+void searchBreakdown(Record *r[], char management_type);  // 항목별 내역 확인
+void searchPrice(Record *r[], char management_type);  // 금액별 내역 확인
 void printMonthRecords(Record *r[], int count, char *yearmonth);
 void printPaymentMethod(Record *r[], int count, char paymentmethod);
 
