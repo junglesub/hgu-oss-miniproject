@@ -1,3 +1,8 @@
+![Github Issues](https://img.shields.io/github/issues-raw/junglesub/hgu-oss-miniproject?color=87ceeb)
+![Github Issues Closed](https://img.shields.io/github/issues-closed-raw/junglesub/hgu-oss-miniproject)
+![Github PR Closed](https://img.shields.io/github/issues-pr-closed-raw/junglesub/hgu-oss-miniproject?color=00bb00)
+
+
 **기업 수입/지출 내역 관리 프로그램**
 =============================
 #### 기업의 연간 수입/지출 내역을 손쉽게 기록하고 한눈에 보자!
