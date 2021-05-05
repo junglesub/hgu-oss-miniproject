@@ -3,7 +3,7 @@
 
 typedef struct {
   char date[20];
-  char type;     // 수입 또는 지출의 항목.
+  char type;     // 수입 또는 지출의 항목
   int category;  // 수입 (0) 또는 지출 (1)
   int price;
   char paymentMethod;
