@@ -48,10 +48,11 @@ int updateRecord(Record *r[], int record_num){
     return 1;
 }
 
-int main(){
-    Record *r[100];
-    int count;
-    
-    count = createRecord(r,0);
-    count = updateRecord(r,0);
+int selectDataNo(Record *r[], int count){
+    int no;
+    listRecord(r, count); 
+    printf("번호는? (취소:0)? "); 
+        scanf("%d", &no);
+    return no;
 }
+
