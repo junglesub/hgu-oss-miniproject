@@ -1,0 +1,1 @@
+Record *r[], int record_num
