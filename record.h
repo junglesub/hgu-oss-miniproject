@@ -13,7 +13,7 @@ typedef struct {
 void readRecord(Record *r[], int count, int readIndex);
 int createRecord(Record *r[], int count);
 int updateRecord(Record *r[], int record_num);
-void deleteRecord(Record *r[], int count, int delIndex);
+void deleteRecord(Record *r[], int *count, int delIndex);
 
 // 검색 및 출력
 void printMonthRecords(Record *r[], int count,
