@@ -80,3 +80,5 @@ int selectDataNo(Record *r[], int count) {
   scanf("%d", &no);
   return no;
 }
+
+void listRecord(Record *r[], int count) {}
