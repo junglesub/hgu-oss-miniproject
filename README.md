@@ -6,7 +6,8 @@
 **가계부 프로그램**
 =============================
 #### 가정의 연간 수입/지출 내역을 편리하게 기록하고 한눈에 보자!
-![가계부](https://user-images.githubusercontent.com/70666097/117020441-684fe000-ad31-11eb-8d86-91c9f7ba079c.jpg){: width="300" height="200"}
+###### ![가계부](https://user-images.githubusercontent.com/70666097/117020441-684fe000-ad31-11eb-8d86-91c9f7ba079c.jpg){: width="300" height="200"}
+<img src = "https://user-images.githubusercontent.com/70666097/117020441-684fe000-ad31-11eb-8d86-91c9f7ba079c.jpg" width="40% height=30%">
 
 ### Mini Project 주제
     수입/지출 내역 관리 프로그램
