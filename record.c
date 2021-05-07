@@ -4,6 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+char category[][20] = {"수입", "지출"};
+char type[][8][20] = {{"근로소득", "금융소득", "기타"},
+                      {"식비", "월세", "공과금", "교통/통신비", "문화생활비",
+                       "교육비", "저축", "기타지출"}};
+char paymentMethod[][20] = {"현금",   "카드",   "계좌이체",
+                            "휴대폰", "상품권", "기타"};
+
 void readRecord(Record *r[], int count, int readIndex) {
   // 읽으려고 하는 아이템이 총 저장된 갯수보다 많거나 같으면 오류 메세지 출력.
   if (count <= readIndex) {
