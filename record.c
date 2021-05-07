@@ -11,6 +11,31 @@ char inc_type[][20] = {"근로소득", "금융소득", "기타"};
 char paymentMethod[][20] = {"현금",   "카드",   "계좌이체",
                             "휴대폰", "상품권", "기타"};
 
+int createRecord(Record *r[], int count) {
+  r[count] = malloc(sizeof(Record));
+
+  printf("일시는? (ex:2020-05-05) ");
+  scanf(" %[^\n]s", r[count]->date);
+  printf("관리하고자 하는 category는? (수입:0 지출:1) ");
+  scanf("%d", &r[count]->category);
+  if (r[count]->category % 2 == 0) {
+    printf("수입 항목은? (근로소득:0, 금융소득:1, 기타소득:2) ");
+    scanf(" %d", &r[count]->type);
+  } else {
+    printf(
+        "지출 항목은?\n(식비:0, 월세:1, 공과금:2, 교통/통신비:3, 문화생활비:4, "
+        "교육비:5, 저축:6, 기타지출:7) ");
+    scanf(" %d", &r[count]->type);
+  }
+  printf("금액은? ");
+  scanf("%d", &r[count]->price);
+  printf(
+      "결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
+  scanf(" %d", &r[count]->paymentMethod);
+  printf("기록이 추가되었습니다!\n");
+  return 1;
+}
+
 void readRecord(Record *r[], int count, int readIndex) {
   // 읽으려고 하는 아이템이 총 저장된 갯수보다 많거나 같으면 오류 메세지 출력.
   if (count <= readIndex) {
@@ -35,62 +60,29 @@ void readRecord(Record *r[], int count, int readIndex) {
          r[readIndex]->price, paymentMethod[r[readIndex]->paymentMethod]);
 }
 
-int createRecord(Record *r[], int count) {
-  r[count] = malloc(sizeof(Record));
-
-  printf("일시는? (ex:2020-05-05) ");
-  scanf(" %[^\n]s", r[count]->date);
-  printf("관리하고자 하는 category는? (수업:0 지출:1) ");
-  scanf("%d", &r[count]->category);
-  if (r[count]->category % 2 == 0) {
-    printf("수입 항목은? (근로소득:0, 금융소득:1, 기타소득:2) ");
-    scanf(" %d", &r[count]->type);
-  } else {
-    printf(
-        "지출 항목은?\n(식비:0, 월세:1, 공과금:2, 교통/통신비:3, 문화생활비:4, "
-        "교육비:5, 저축:6, 기타지출:7) ");
-    scanf(" %d", &r[count]->type);
-  }
-  printf("금액은? ");
-  scanf("%d", &r[count]->price);
-  printf(
-      "계산수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
-  scanf(" %d", &r[count]->paymentMethod);
-  printf("기록이 추가되었습니다!\n");
-  return 1;
-}
-
-int updateRecord(Record *r[], int record_num) {
+int updateRecord(Record *r[], int updIndex) {
   printf("기록 내역을 업데이트하겠습니다.\n");
 
   printf("일시는? (ex:2020-05-05) ");
-  scanf(" %[^\n]s", r[record_num]->date);
-  printf("관리하고자 하는 category는? (수업:0 지출:1) ");
-  scanf("%d", &r[record_num]->category);
-  if (r[record_num]->category % 2 == 0) {
+  scanf(" %[^\n]s", r[updIndex]->date);
+  printf("관리하고자 하는 category는? (수입:0 지출:1) ");
+  scanf("%d", &r[updIndex]->category);
+  if (r[updIndex]->category % 2 == 0) {
     printf("수입 항목은? (근로소득:0, 금융소득:1, 기타소득:2) ");
-    scanf(" %d", &r[record_num]->type);
+    scanf(" %d", &r[updIndex]->type);
   } else {
     printf(
         "지출 항목은?\n(식비:0, 월세:1, 공과금:2, 교통/통신비:3, 문화생활비:4, "
         "교육비:5, 저축:6, 기타지출:7) ");
-    scanf(" %d", &r[record_num]->type);
+    scanf(" %d", &r[updIndex]->type);
   }
   printf("금액은? ");
-  scanf("%d", &r[record_num]->price);
+  scanf("%d", &r[updIndex]->price);
   printf(
-      "계산수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
-  scanf(" %d", &r[record_num]->paymentMethod);
+      "결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
+  scanf(" %d", &r[updIndex]->paymentMethod);
   printf("기록이 업데이트 되었습니다!\n");
   return 1;
-}
-
-int selectDataNo(Record *r[], int count) {
-  int no;
-  listRecord(r, count);
-  printf("번호는? (취소:0)? ");
-  scanf("%d", &no);
-  return no;
 }
 
 void deleteRecord(Record *r[], int *count, int delIndex) {
@@ -117,6 +109,28 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
   r[*count - 1] = NULL;  // 마지막 아이템은 NULL 으로 지정.
   (*count)--;
   printf("%d번째 항목 삭제 완료!\n", delIndex);
+}
+
+int selectDataNo(Record *r[], int count) {
+  int no;
+  listRecord(r, count);
+  printf("번호는? (취소:0)? ");
+  scanf("%d", &no);
+  return no;
+}
+
+int selectMenu(void) {
+  int sel;
+  printf("\n===== 가계부 프로그램 =====\n");
+  printf("1. 기록 추가\n");
+  printf("2. 전체 기록 조회\n");
+  printf("3. 특정 기록 조회\n");
+  printf("4. 기록 삭제\n");
+  printf("0. 종료\n");
+  printf("=> 원하는 메뉴는? ");
+
+  scanf("%d", &sel);
+  return sel;
 }
 
 void listRecord(Record *r[], int count) {
