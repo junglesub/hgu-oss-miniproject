@@ -6,7 +6,7 @@ typedef struct {
   int category;       // 수입 (0) 또는 지출 (1)
   int type;           // 수입 또는 지출의 세부항목
   int price;          // 금액
-  int paymentMethod;  // 계산수단
+  int paymentMethod;  // 결제수단
 } Record;
 
 // CRUD
@@ -19,7 +19,7 @@ void deleteRecord(Record *r[], int *count, int delIndex);
 void printMonthRecords(Record *r[], int count, char *yearmonth);  // 월별 내역 확인
 void searchBreakdown(Record *r[], char management_type);  // 항목별 내역 확인
 void searchPrice(Record *r[], char management_type);  // 금액별 내역 확인
-void printPaymentMethod(Record *r[], int count, char paymentmethod);  // 계산 수단별 내역 확인
+void printPaymentMethod(Record *r[], int count, char paymentmethod);  // 결제수단별 내역 확인
 
 // 불러오기 및 저장
 void save(Record *r[], int count, char *filename);

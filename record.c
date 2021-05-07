@@ -16,7 +16,7 @@ int createRecord(Record *r[], int count) {
 
   printf("일시는? (ex:2020-05-05) ");
   scanf(" %[^\n]s", r[count]->date);
-  printf("관리하고자 하는 category는? (수업:0 지출:1) ");
+  printf("관리하고자 하는 category는? (수입:0 지출:1) ");
   scanf("%d", &r[count]->category);
   if (r[count]->category % 2 == 0) {
     printf("수입 항목은? (근로소득:0, 금융소득:1, 기타소득:2) ");
@@ -30,7 +30,7 @@ int createRecord(Record *r[], int count) {
   printf("금액은? ");
   scanf("%d", &r[count]->price);
   printf(
-      "계산수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
+      "결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
   scanf(" %d", &r[count]->paymentMethod);
   printf("기록이 추가되었습니다!\n");
   return 1;
@@ -63,7 +63,7 @@ int updateRecord(Record *r[], int updIndex) {
 
   printf("일시는? (ex:2020-05-05) ");
   scanf(" %[^\n]s", r[updIndex]->date);
-  printf("관리하고자 하는 category는? (수업:0 지출:1) ");
+  printf("관리하고자 하는 category는? (수입:0 지출:1) ");
   scanf("%d", &r[updIndex]->category);
   if (r[updIndex]->category % 2 == 0) {
     printf("수입 항목은? (근로소득:0, 금융소득:1, 기타소득:2) ");
@@ -77,7 +77,7 @@ int updateRecord(Record *r[], int updIndex) {
   printf("금액은? ");
   scanf("%d", &r[updIndex]->price);
   printf(
-      "계산수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
+      "결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, 상품권:4, 기타:5) ");
   scanf(" %d", &r[updIndex]->paymentMethod);
   printf("기록이 업데이트 되었습니다!\n");
   return 1;
