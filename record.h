@@ -2,11 +2,11 @@
 #define __RECORDS_H__
 
 typedef struct {
-  char date[20];       // 일시
-  char type;           // 수입 또는 지출의 세부항목
-  int category;        // 수입 (0) 또는 지출 (1)
-  int price;           // 금액
-  char paymentMethod;  // 계산수단
+  char date[20];      // 일시
+  int type;           // 수입 또는 지출의 세부항목
+  int category;       // 수입 (0) 또는 지출 (1)
+  int price;          // 금액
+  int paymentMethod;  // 계산수단
 } Record;
 
 // CRUD
