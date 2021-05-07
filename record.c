@@ -25,10 +25,12 @@ void readRecord(Record *r[], int count, int readIndex) {
   }
 
   // 아래는 출력할 내용들.
-  printf("%s\t%s\t%s\t%d\t%s\n", r[readIndex]->date,
+  printf("No|\tdate|\tcategory|\ttype|\tprice|\tpaymentMethod\n");
+  printf("===================================================================\n");
+  printf(" %d %s\t%s\t%s\t%d\t%s\n", readIndex, r[readIndex]->date,
+         category[r[readIndex]->category], 
          type[r[count]->category % 2][r[readIndex]->type],
-         category[r[readIndex]->category], r[readIndex]->price,
-         paymentMethod[r[readIndex]->paymentMethod]);
+         r[readIndex]->price, paymentMethod[r[readIndex]->paymentMethod]);
 }
 
 int createRecord(Record *r[], int count) {
@@ -89,4 +91,12 @@ int selectDataNo(Record *r[], int count) {
   return no;
 }
 
-void listRecord(Record *r[], int count) {}
+void listRecord(Record *r[], int count) {
+    printf("No|\tdate|\tcategory|\ttype|\tprice|\tpaymentMethod\n");
+    printf("===================================================================\n");
+    for(int i=0; i<count; i++){
+        printf(" %d %s\t%c\t%d\t%d\t%c\n", i+1, r[i]->date, 
+         r[i]->category, r[i]->type,
+         r[i]->price, r[i]->paymentMethod);
+    }
+}
