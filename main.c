@@ -30,6 +30,12 @@ int main(void) {
         if (no == 0) break;
         deleteRecord(r, &count, no - 1);
         break;
+      case 5:
+        // Update
+        no = selectDataNo(r, count);
+        if (no == 0) break;
+        updateRecord(r, no - 1);
+        break;
       default:
         printf("잘못된 선택!\n");
     }
