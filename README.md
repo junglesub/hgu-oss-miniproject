@@ -34,6 +34,9 @@
     - Read(특정 기록 조회), Delete 함수 
     - Save, 메뉴 선택 함수
     - 월간, 결제수단별 내역 검색 함수
+    
+### 개발자료
+[Wiki] (https://github.com/junglesub/hgu-oss-miniproject.wiki.git)
  
 ------------------------------------------------------------------
     
