@@ -36,7 +36,7 @@
     - 월간, 결제수단별 내역 검색 함수
     
 ### 개발자료
-    [Wiki]: https://github.com/junglesub/hgu-oss-miniproject/wiki
+[Wiki]: https://github.com/junglesub/hgu-oss-miniproject/wiki
  
 ------------------------------------------------------------------
     
