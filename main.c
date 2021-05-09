@@ -12,7 +12,6 @@ int main(void) {
     int no;
     switch (sel) {
       case 0:
-        printf("종료됨!\n");
         return 1;
       case 1:
         count += createRecord(r, count);
