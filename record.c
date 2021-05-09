@@ -126,6 +126,7 @@ int selectMenu(void) {
   printf("2. 전체 기록 조회\n");
   printf("3. 특정 기록 조회\n");
   printf("4. 기록 삭제\n");
+  printf("5. 기록 업데이트\n");
   printf("0. 종료\n");
   printf("=> 원하는 메뉴는? ");
 
