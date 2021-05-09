@@ -14,7 +14,7 @@ char paymentMethod[][20] = {"현금",   "카드",   "계좌이체",
 int createRecord(Record *r[], int count) {
   r[count] = malloc(sizeof(Record));
 
-  printf("일시는? (ex:2020-05-05) ");
+  printf("일시는? (ex:2021-05-05) ");
   scanf(" %[^\n]s", r[count]->date);
   printf("관리하고자 하는 category는? (수입:0 지출:1) ");
   scanf("%d", &r[count]->category);
@@ -23,7 +23,7 @@ int createRecord(Record *r[], int count) {
     scanf(" %d", &r[count]->type);
   } else {
     printf(
-        "지출 항목은?\n(식비:0, 월세:1, 공과금:2, 교통/통신비:3, 문화생활비:4, "
+        "지출 항목은? (식비:0, 월세:1, 공과금:2, 교통/통신비:3, 문화생활비:4, "
         "교육비:5, 저축:6, 기타지출:7) ");
     scanf(" %d", &r[count]->type);
   }
@@ -50,7 +50,7 @@ void readRecord(Record *r[], int count, int readIndex) {
   }
 
   // 아래는 출력할 내용들.
-  printf("No|\tdate|\tcategory|\ttype|\tprice|\tpaymentMethod\n");
+  printf("\nNo|  date|  category|  type|  price|  paymentMethod\n");
   printf(
       "===================================================================\n");
   printf(" %d %s\t%s\t%s\t%d\t%s\n", readIndex, r[readIndex]->date,
@@ -63,7 +63,7 @@ void readRecord(Record *r[], int count, int readIndex) {
 int updateRecord(Record *r[], int updIndex) {
   printf("기록 내역을 업데이트하겠습니다.\n");
 
-  printf("일시는? (ex:2020-05-05) ");
+  printf("일시는? (ex:2021-05-05) ");
   scanf(" %[^\n]s", r[updIndex]->date);
   printf("관리하고자 하는 category는? (수입:0 지출:1) ");
   scanf("%d", &r[updIndex]->category);
@@ -72,7 +72,7 @@ int updateRecord(Record *r[], int updIndex) {
     scanf(" %d", &r[updIndex]->type);
   } else {
     printf(
-        "지출 항목은?\n(식비:0, 월세:1, 공과금:2, 교통/통신비:3, 문화생활비:4, "
+        "지출 항목은? (식비:0, 월세:1, 공과금:2, 교통/통신비:3, 문화생활비:4, "
         "교육비:5, 저축:6, 기타지출:7) ");
     scanf(" %d", &r[updIndex]->type);
   }
@@ -108,7 +108,7 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
   }
   r[*count - 1] = NULL;  // 마지막 아이템은 NULL 으로 지정.
   (*count)--;
-  printf("%d번째 항목 삭제 완료!\n", delIndex);
+  printf("%d번째 항목 삭제 완료!\n", delIndex + 1);
 }
 
 int selectDataNo(Record *r[], int count) {
@@ -135,7 +135,7 @@ int selectMenu(void) {
 }
 
 void listRecord(Record *r[], int count) {
-  printf("No|\tdate|\tcategory|\ttype|\tprice|\tpaymentMethod\n");
+  printf("\nNo|  date|  category|  type|  price|  paymentMethod\n");
   printf(
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
