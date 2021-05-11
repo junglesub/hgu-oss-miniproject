@@ -11,6 +11,7 @@ int main(void) {
   while (1) {
     sel = selectMenu();
     int no;
+    char yearmonth[8];
     switch (sel) {
       case 0:
         printf("종료됨!\n");
@@ -41,7 +42,10 @@ int main(void) {
         saveRecord(r, count);
         break;
       case 6:
-        // printMonthRecords(r,count,yearmonth);
+        printf("검색하고 싶은 일시는? (ex:2021-05-05) ");
+        scanf(" %[^\n]s", yearmonth);
+        printMonthRecords(r,count,yearmonth);
+        break;
       case 7:
         // searchBreakdown(r, management_type);
       case 8:

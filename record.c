@@ -197,3 +197,16 @@ void printPaymentMethod(Record *r[], int count, int paymentmethod) {
         r[i]->price, paymentMethod[r[i]->paymentMethod]);
   }
 }
+
+void printMonthRecords(Record *r[], int count, char *yearmonth) {
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+  printf(
+      "===================================================================\n");
+  for (int i = 0; i < count; i++) {
+    if (strncmp(yearmonth, r[i]->date, 7) != 0) continue;
+    printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+  }
+}
