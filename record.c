@@ -159,3 +159,19 @@ void printPaymentMethod(Record *r[], int count, int paymentmethod) {
         r[i]->price, paymentMethod[r[i]->paymentMethod]);
   }
 }
+
+void searchBreakdown(Record *r[], int count, int management_category,
+                     int management_type) {
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+  printf(
+      "===================================================================\n");
+  for (int i = 0; i < count; i++) {
+    if (!(r[i]->category == management_category &&
+          r[i]->type == management_type))
+      continue;
+    printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+  }
+}

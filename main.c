@@ -9,7 +9,7 @@ int main(void) {
 
   while (1) {
     sel = selectMenu();
-    int no;
+    int no, no2;
     switch (sel) {
       case 0:
         printf("종료됨!\n");
@@ -44,6 +44,21 @@ int main(void) {
             "기타:5) ");
         scanf("%d", &no);
         printPaymentMethod(r, count, no);
+        break;
+      case 7:
+        printf("검색하고자 하는 category는? (수입:0 지출:1) ");
+        scanf("%d", &no);  // no 는 category
+        if (no % 2 == 0) {
+          printf("수입 항목은? (근로소득:0, 금융소득:1, 기타소득:2) ");
+          scanf(" %d", &no2);  // no2 는 항목
+        } else {
+          printf(
+              "지출 항목은? (식비:0, 월세:1, 공과금:2, 교통/통신비:3, "
+              "문화생활비:4, "
+              "교육비:5, 저축:6, 기타지출:7) ");
+          scanf(" %d", &no2);
+        }
+        searchBreakdown(r, count, no, no2);
         break;
       default:
         printf("잘못된 선택!\n");
