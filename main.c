@@ -6,6 +6,7 @@ int main(void) {
   int sel;
   Record *r[10000];
   int count = 0;
+  count = loadRecord(r);
 
   while (1) {
     sel = selectMenu();
@@ -15,15 +16,20 @@ int main(void) {
         printf("종료됨!\n");
         return 1;
       case 1:
+        // create
         count += createRecord(r, count);
         break;
       case 2:
-        listRecord(r, count);
-        break;
-      case 3:
+        //read
         no = selectDataNo(r, count);
         if (no == 0) break;
         readRecord(r, count, no - 1);
+        break;
+      case 3:
+        // Update
+        no = selectDataNo(r, count);
+        if (no == 0) break;
+        updateRecord(r, no - 1);
         break;
       case 4:
         // Delete
@@ -32,12 +38,15 @@ int main(void) {
         deleteRecord(r, &count, no - 1);
         break;
       case 5:
-        // Update
-        no = selectDataNo(r, count);
-        if (no == 0) break;
-        updateRecord(r, no - 1);
-        break;
+       saveRecord(r, count);
+       break;
       case 6:
+       // printMonthRecords(r,count,yearmonth);
+      case 7:
+       // searchBreakdown(r, management_type);
+      case 8:
+       // searchPrice(r, management_type);
+      case 9:
         printf(
             "검색하고 싶은 결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, "
             "상품권:4, "
@@ -45,6 +54,9 @@ int main(void) {
         scanf("%d", &no);
         printPaymentMethod(r, count, no);
         break;
+      case 10:
+       listRecord(r, count);
+       break;
       default:
         printf("잘못된 선택!\n");
     }
