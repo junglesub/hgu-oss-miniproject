@@ -133,6 +133,7 @@ int loadRecord(Record *r[], char *filename){
   }
   for(; i<RECORDS_MAX; i++){
     if(feof(fp)) break;
+    r[i] = malloc(sizeof(Record));
     fscanf(fp,"%s",r[i]->date);
     fscanf(fp,"%d",&r[i]->category);
     fscanf(fp,"%d",&r[i]->type);
