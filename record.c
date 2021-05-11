@@ -111,34 +111,34 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
   printf("%d번째 항목 삭제 완료!\n", delIndex + 1);
 }
 
-void saveRecord(Record *r[], int count){
+void saveRecord(Record *r[], int count) {
   FILE *fp;
-  fp = fopen("Record.txt","wt");
-  for(int i=0; i<count; i++){
-    fprintf(fp,"%s %d %d %d %d\n",r[i]->date, r[i]->category,
-      r[i]->type, r[i]->price, r[i]->paymentMethod);
+  fp = fopen("Record.txt", "wt");
+  for (int i = 0; i < count; i++) {
+    fprintf(fp, "%s %d %d %d %d\n", r[i]->date, r[i]->category, r[i]->type,
+            r[i]->price, r[i]->paymentMethod);
   }
   fclose(fp);
   printf("Record.txt 파일에 기록이 저장되었습니다!\n");
 }
 
-int loadRecord(Record *r[]){
-  int i=0;
+int loadRecord(Record *r[]) {
+  int i = 0;
   FILE *fp;
-  fp = fopen("Record.txt","rt");
-  
-  if(fp == NULL){
+  fp = fopen("Record.txt", "rt");
+
+  if (fp == NULL) {
     printf("Record.txt 파일이 없습니다!\n");
     return 0;
   }
-  for(; i<RECORDS_MAX; i++){
-    if(feof(fp)) break;
+  for (; i < RECORDS_MAX; i++) {
+    if (feof(fp)) break;
     r[i] = malloc(sizeof(Record));
-    fscanf(fp,"%s",r[i]->date);
-    fscanf(fp,"%d",&r[i]->category);
-    fscanf(fp,"%d",&r[i]->type);
-    fscanf(fp,"%d",&r[i]->price);
-    fscanf(fp,"%d\n",&r[i]->paymentMethod);
+    fscanf(fp, "%s", r[i]->date);
+    fscanf(fp, "%d", &r[i]->category);
+    fscanf(fp, "%d", &r[i]->type);
+    fscanf(fp, "%d", &r[i]->price);
+    fscanf(fp, "%d\n", &r[i]->paymentMethod);
   }
   fclose(fp);
   printf("Record.txt 파일 기록을 읽어왔습니다!\n");
