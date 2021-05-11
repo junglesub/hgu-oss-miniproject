@@ -138,7 +138,7 @@ int loadRecord(Record *r[], char *filename){
     fscanf(fp,"%d",&r[i]->category);
     fscanf(fp,"%d",&r[i]->type);
     fscanf(fp,"%d",&r[i]->price);
-    fscanf(fp,"%d",&r[i]->paymentMethod);
+    fscanf(fp,"%d\n",&r[i]->paymentMethod);
   }
   fclose(fp);
   printf("%s 파일 기록을 읽어왔습니다!\n", filename);
