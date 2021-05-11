@@ -115,31 +115,33 @@ void saveRecord(Record *r[], int count, char *filename){
   FILE *fp;
   fp = fopen(filename,"wt");
   for(int i=0; i<count; i++){
-    fprintf(fp,"%s %s %s %d %s\n",r[i]->date, r[i]->category,
+    fprintf(fp,"%s %d %d %d %d\n",r[i]->date, r[i]->category,
       r[i]->type, r[i]->price, r[i]->paymentMethod);
   }
   fclose(fp);
   printf("%s 파일에 기록이 저장되었습니다!\n", filename);
 }
 
-void loadRecord(Record *r[], int *count, char *filename){
+int loadRecord(Record *r[], char *filename){
+  int i=0;
   FILE *fp;
   fp = fopen(filename,"rt");
-
+  
   if(fp == NULL){
-    printf("%s 파일이 없습니다!\n");
+    printf("%s 파일이 없습니다!\n", filename);
     return 0;
   }
-  for(int i=0; i<count; i++){
+  for(; i<RECORDS_MAX; i++){
     if(feof(fp)) break;
-    fsanf(fp,"%s",r[i]->date);
-    fsanf(fp,"%s",r[i]->category);
-    fsanf(fp,"%s",r[i]->type);
-    fsanf(fp,"%d",r[i]->price);
-    fsanf(fp,"%s",r[i]->paymentMethod);
+    fscanf(fp,"%s",r[i]->date);
+    fscanf(fp,"%d",&r[i]->category);
+    fscanf(fp,"%d",&r[i]->type);
+    fscanf(fp,"%d",&r[i]->price);
+    fscanf(fp,"%d",&r[i]->paymentMethod);
   }
   fclose(fp);
   printf("%s 파일 기록을 읽어왔습니다!\n", filename);
+  return i;
 }
 
 int selectMenu(void) {
