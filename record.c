@@ -111,36 +111,37 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
   printf("%d번째 항목 삭제 완료!\n", delIndex + 1);
 }
 
-void saveRecord(Record *r[], int count, char *filename){
+void saveRecord(Record *r[], int count){
   FILE *fp;
-  fp = fopen(filename,"wt");
+  fp = fopen("Record.txt","wt");
   for(int i=0; i<count; i++){
     fprintf(fp,"%s %d %d %d %d\n",r[i]->date, r[i]->category,
       r[i]->type, r[i]->price, r[i]->paymentMethod);
   }
   fclose(fp);
-  printf("%s 파일에 기록이 저장되었습니다!\n", filename);
+  printf("Record.txt 파일에 기록이 저장되었습니다!\n");
 }
 
-int loadRecord(Record *r[], char *filename){
+int loadRecord(Record *r[]){
   int i=0;
   FILE *fp;
-  fp = fopen(filename,"rt");
+  fp = fopen("Record.txt","rt");
   
   if(fp == NULL){
-    printf("%s 파일이 없습니다!\n", filename);
+    printf("Record.txt 파일이 없습니다!\n");
     return 0;
   }
   for(; i<RECORDS_MAX; i++){
     if(feof(fp)) break;
+    r[i] = malloc(sizeof(Record));
     fscanf(fp,"%s",r[i]->date);
     fscanf(fp,"%d",&r[i]->category);
     fscanf(fp,"%d",&r[i]->type);
     fscanf(fp,"%d",&r[i]->price);
-    fscanf(fp,"%d",&r[i]->paymentMethod);
+    fscanf(fp,"%d\n",&r[i]->paymentMethod);
   }
   fclose(fp);
-  printf("%s 파일 기록을 읽어왔습니다!\n", filename);
+  printf("Record.txt 파일 기록을 읽어왔습니다!\n");
   return i;
 }
 
@@ -148,11 +149,15 @@ int selectMenu(void) {
   int sel;
   printf("\n===== 가계부 프로그램 =====\n");
   printf("1. 기록 추가\n");
-  printf("2. 전체 기록 조회\n");
-  printf("3. 특정 기록 조회\n");
+  printf("2. 특정 기록 조회\n");
+  printf("3. 기록 업데이트\n");
   printf("4. 기록 삭제\n");
-  printf("5. 기록 업데이트\n");
-  printf("6. 결제 방법으로 출력\n");
+  printf("5. 파일 저장\n");
+  printf("6. 월간 내역 검색\n");
+  printf("7. 항목별 내역 검색\n");
+  printf("8. 금액별 내역 검색\n");
+  printf("9. 결제수단별 내역 검색\n");
+  printf("10. 전체 기록 조회\n");
   printf("0. 종료\n");
   printf("=> 원하는 메뉴는? ");
 

@@ -27,8 +27,8 @@ void printPaymentMethod(Record *r[], int count,
                         int paymentmethod);  // 결제수단별 내역 확인
 
 // 불러오기 및 저장
-void saveRecord(Record *r[], int count, char *filename);
-int loadRecord(Record *r[], char *filename);
+void saveRecord(Record *r[], int count);
+int loadRecord(Record *r[]);
 
 // 기타
 int selectMenu();
