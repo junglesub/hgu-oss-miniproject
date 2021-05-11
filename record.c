@@ -127,6 +127,7 @@ int selectMenu(void) {
   printf("3. 특정 기록 조회\n");
   printf("4. 기록 삭제\n");
   printf("5. 기록 업데이트\n");
+  printf("6. 결제 방법으로 출력\n");
   printf("0. 종료\n");
   printf("=> 원하는 메뉴는? ");
 
@@ -139,6 +140,19 @@ void listRecord(Record *r[], int count) {
   printf(
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
+    printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+  }
+}
+
+void printPaymentMethod(Record *r[], int count, int paymentmethod) {
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+  printf(
+      "===================================================================\n");
+  for (int i = 0; i < count; i++) {
+    if (r[i]->paymentMethod != paymentmethod) continue;
     printf(
         "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
         r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
