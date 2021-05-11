@@ -1,6 +1,8 @@
 #ifndef __RECORDS_H__
 #define __RECORDS_H__
 
+#define RECORDS_MAX 10000
+
 typedef struct {
   char date[20];      // 일시
   int category;       // 수입 (0) 또는 지출 (1)
@@ -25,8 +27,8 @@ void printPaymentMethod(Record *r[], int count,
                         int paymentmethod);  // 결제수단별 내역 확인
 
 // 불러오기 및 저장
-void save(Record *r[], int count, char *filename);
-void load(Record *r[], int *count, char *filename);
+void saveRecord(Record *r[], int count, char *filename);
+int loadRecord(Record *r[], char *filename);
 
 // 기타
 int selectMenu();

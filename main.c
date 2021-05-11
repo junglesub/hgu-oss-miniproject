@@ -4,7 +4,7 @@
 
 int main(void) {
   int sel;
-  Record *r[100];
+  Record *r[10000];
   int count = 0;
 
   while (1) {

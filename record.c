@@ -111,12 +111,37 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
   printf("%d번째 항목 삭제 완료!\n", delIndex + 1);
 }
 
-int selectDataNo(Record *r[], int count) {
-  int no;
-  listRecord(r, count);
-  printf("번호는? (취소:0)? ");
-  scanf("%d", &no);
-  return no;
+void saveRecord(Record *r[], int count, char *filename){
+  FILE *fp;
+  fp = fopen(filename,"wt");
+  for(int i=0; i<count; i++){
+    fprintf(fp,"%s %d %d %d %d\n",r[i]->date, r[i]->category,
+      r[i]->type, r[i]->price, r[i]->paymentMethod);
+  }
+  fclose(fp);
+  printf("%s 파일에 기록이 저장되었습니다!\n", filename);
+}
+
+int loadRecord(Record *r[], char *filename){
+  int i=0;
+  FILE *fp;
+  fp = fopen(filename,"rt");
+  
+  if(fp == NULL){
+    printf("%s 파일이 없습니다!\n", filename);
+    return 0;
+  }
+  for(; i<RECORDS_MAX; i++){
+    if(feof(fp)) break;
+    fscanf(fp,"%s",r[i]->date);
+    fscanf(fp,"%d",&r[i]->category);
+    fscanf(fp,"%d",&r[i]->type);
+    fscanf(fp,"%d",&r[i]->price);
+    fscanf(fp,"%d",&r[i]->paymentMethod);
+  }
+  fclose(fp);
+  printf("%s 파일 기록을 읽어왔습니다!\n", filename);
+  return i;
 }
 
 int selectMenu(void) {
@@ -133,6 +158,14 @@ int selectMenu(void) {
 
   scanf("%d", &sel);
   return sel;
+}
+
+int selectDataNo(Record *r[], int count) {
+  int no;
+  listRecord(r, count);
+  printf("번호는? (취소:0)? ");
+  scanf("%d", &no);
+  return no;
 }
 
 void listRecord(Record *r[], int count) {
