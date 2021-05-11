@@ -37,6 +37,14 @@ int main(void) {
         if (no == 0) break;
         updateRecord(r, no - 1);
         break;
+      case 6:
+        printf(
+            "검색하고 싶은 결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, "
+            "상품권:4, "
+            "기타:5) ");
+        scanf("%d", &no);
+        printPaymentMethod(r, count, no);
+        break;
       default:
         printf("잘못된 선택!\n");
     }
