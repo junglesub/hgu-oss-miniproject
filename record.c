@@ -133,11 +133,12 @@ int loadRecord(Record *r[]){
   }
   for(; i<RECORDS_MAX; i++){
     if(feof(fp)) break;
+    r[i] = malloc(sizeof(Record));
     fscanf(fp,"%s",r[i]->date);
     fscanf(fp,"%d",&r[i]->category);
     fscanf(fp,"%d",&r[i]->type);
     fscanf(fp,"%d",&r[i]->price);
-    fscanf(fp,"%d",&r[i]->paymentMethod);
+    fscanf(fp,"%d\n",&r[i]->paymentMethod);
   }
   fclose(fp);
   printf("Record.txt 파일 기록을 읽어왔습니다!\n");
