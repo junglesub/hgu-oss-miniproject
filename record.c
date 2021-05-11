@@ -5,8 +5,8 @@
 #include <string.h>
 
 char category[][20] = {"수입", "지출"};
-char exp_type[][20] = {"식비",       "월세",   "공과금", "교통/통신비",
-                       "문화생활비", "교육비", "저축",   "기타지출"};
+char exp_type[][20] = {"\t식비",     "\t월세",   "\t공과금", "교통/통신비",
+                       "문화생활비", "\t교육비", "\t저축",   "\t기타지출"};
 char inc_type[][20] = {"근로소득", "금융소득", "기타"};
 char paymentMethod[][20] = {"현금",   "카드",   "계좌이체",
                             "휴대폰", "상품권", "기타"};
@@ -50,10 +50,10 @@ void readRecord(Record *r[], int count, int readIndex) {
   }
 
   // 아래는 출력할 내용들.
-  printf("\nNo|  date|  category|  type|  price|  paymentMethod\n");
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
       "===================================================================\n");
-  printf(" %d %s\t%s\t%s\t%d\t%s\n", readIndex, r[readIndex]->date,
+  printf("%d\t%s\t%s\t%s\t%d\t%s\n", readIndex, r[readIndex]->date,
          category[r[readIndex]->category],
          r[readIndex]->category % 2 == 0 ? inc_type[r[readIndex]->type]
                                          : exp_type[r[readIndex]->type],
@@ -135,11 +135,13 @@ int selectMenu(void) {
 }
 
 void listRecord(Record *r[], int count) {
-  printf("\nNo|  date|  category|  type|  price|  paymentMethod\n");
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
-    printf(" %d %s\t%d\t%d\t%d\t%d\n", i + 1, r[i]->date, r[i]->category,
-           r[i]->type, r[i]->price, r[i]->paymentMethod);
+    printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
   }
 }
