@@ -22,8 +22,8 @@ void searchPrice(Record *r[], char management_type);  // 금액별 내역 확인
 void printPaymentMethod(Record *r[], int count, char paymentmethod);  // 결제수단별 내역 확인
 
 // 불러오기 및 저장
-void save(Record *r[], int count, char *filename);
-void load(Record *r[], int *count, char *filename);
+void saveRecord(Record *r[], int count, char *filename);
+void loadRecord(Record *r[], int *count, char *filename);
 
 // 기타
 int selectMenu();
