@@ -45,7 +45,16 @@ int main(void) {
       case 7:
        // searchBreakdown(r, management_type);
       case 8:
-       // searchPrice(r, management_type);
+        printf("수입/지출 중 어떤 cateory의 가격을 검색하시겠습니까? (수입:0, 지출:1) ");
+        scanf("%d", &no);
+        while(1){
+          if(no == 0 || no == 1) {
+            searchPrice(r, count, no);
+            break;
+          }
+          printf("0 또는 1을 입력해주세요!\n");
+        }
+        break;
       case 9:
         printf(
             "검색하고 싶은 결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, "

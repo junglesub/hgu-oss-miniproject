@@ -133,12 +133,11 @@ int loadRecord(Record *r[]){
   }
   for(; i<RECORDS_MAX; i++){
     if(feof(fp)) break;
-    r[i] = malloc(sizeof(Record));
     fscanf(fp,"%s",r[i]->date);
     fscanf(fp,"%d",&r[i]->category);
     fscanf(fp,"%d",&r[i]->type);
     fscanf(fp,"%d",&r[i]->price);
-    fscanf(fp,"%d\n",&r[i]->paymentMethod);
+    fscanf(fp,"%d",&r[i]->paymentMethod);
   }
   fclose(fp);
   printf("Record.txt 파일 기록을 읽어왔습니다!\n");
@@ -183,6 +182,30 @@ void listRecord(Record *r[], int count) {
         r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
         r[i]->price, paymentMethod[r[i]->paymentMethod]);
   }
+}
+
+void searchPrice(Record *r[], int count, int category){
+  int scnt = 0;
+  int min_price, max_price;
+
+  while(1){
+    printf("검색하고 싶은 기록의 금액대는? \n=> minimum price, maximum price를 차례대로 입력하세요 : "); 
+    scanf("%d %d", &min_price, &max_price);
+    if(min_price <= max_price) break;
+  }
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+  printf("===================================================================\n");
+  for(int i=0; i<count; i++){
+    if(r[i]->category != category) continue;
+    if(r[i]->price >= min_price && r[i]->price <= max_price){
+      printf("%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+      scnt++;
+    } 
+  }
+  if(scnt == 0) printf("=> 원하는 가격대의 기록이 없습니다!");
+  printf("\n");
 }
 
 void printPaymentMethod(Record *r[], int count, int paymentmethod) {
