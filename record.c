@@ -111,33 +111,35 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
   printf("%d번째 항목 삭제 완료!\n", delIndex + 1);
 }
 
-void saveRecord(Record *r[], int count){
+void saveRecord(Record *r[], int count) {
   FILE *fp;
-  fp = fopen("Record.txt","wt");
-  for(int i=0; i<count; i++){
-    fprintf(fp,"%s %d %d %d %d\n",r[i]->date, r[i]->category,
-      r[i]->type, r[i]->price, r[i]->paymentMethod);
+  fp = fopen("Record.txt", "wt");
+  for (int i = 0; i < count; i++) {
+    fprintf(fp, "%s %d %d %d %d\n", r[i]->date, r[i]->category, r[i]->type,
+            r[i]->price, r[i]->paymentMethod);
   }
   fclose(fp);
   printf("Record.txt 파일에 기록이 저장되었습니다!\n");
 }
 
-int loadRecord(Record *r[]){
-  int i=0;
+int loadRecord(Record *r[]) {
+  int i = 0;
   FILE *fp;
-  fp = fopen("Record.txt","rt");
-  
-  if(fp == NULL){
+  fp = fopen("Record.txt", "rt");
+
+  if (fp == NULL) {
     printf("Record.txt 파일이 없습니다!\n");
     return 0;
   }
-  for(; i<RECORDS_MAX; i++){
-    if(feof(fp)) break;
-    fscanf(fp,"%s",r[i]->date);
-    fscanf(fp,"%d",&r[i]->category);
-    fscanf(fp,"%d",&r[i]->type);
-    fscanf(fp,"%d",&r[i]->price);
-    fscanf(fp,"%d",&r[i]->paymentMethod);
+
+  for (; i < RECORDS_MAX; i++) {
+    if (feof(fp)) break;
+    r[i] = malloc(sizeof(Record));
+    fscanf(fp, "%s", r[i]->date);
+    fscanf(fp, "%d", &r[i]->category);
+    fscanf(fp, "%d", &r[i]->type);
+    fscanf(fp, "%d", &r[i]->price);
+    fscanf(fp, "%d\n", &r[i]->paymentMethod);
   }
   fclose(fp);
   printf("Record.txt 파일 기록을 읽어왔습니다!\n");
@@ -184,7 +186,7 @@ void listRecord(Record *r[], int count) {
   }
 }
 
-void searchPrice(Record *r[], int count, int category){
+void searchPrice(Record *r[], int count, int management_category){
   int scnt = 0;
   int min_price, max_price;
 
@@ -196,7 +198,7 @@ void searchPrice(Record *r[], int count, int category){
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf("===================================================================\n");
   for(int i=0; i<count; i++){
-    if(r[i]->category != category) continue;
+    if(r[i]->category != management_category) continue;
     if(r[i]->price >= min_price && r[i]->price <= max_price){
       printf("%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
         r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
@@ -215,6 +217,35 @@ void printPaymentMethod(Record *r[], int count, int paymentmethod) {
   for (int i = 0; i < count; i++) {
     if (r[i]->paymentMethod != paymentmethod) continue;
     printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+  }
+}
+
+void searchBreakdown(Record *r[], int count, int management_category,
+                     int management_type) {
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+  printf(
+      "===================================================================\n");
+  for (int i = 0; i < count; i++) {
+    if (!(r[i]->category == management_category &&
+          r[i]->type == management_type))
+      continue;
+    printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+  }
+}
+    
+  void printMonthRecords(Record *r[], int count, char *yearmonth) {
+    printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+  printf(
+      "===================================================================\n");
+  for (int i = 0; i < count; i++) {
+    if (strncmp(yearmonth, r[i]->date, 7) != 0) continue;
+      printf(
         "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
         r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
         r[i]->price, paymentMethod[r[i]->paymentMethod]);
