@@ -24,7 +24,7 @@ void searchBreakdown(Record *r[], int count, int management_category,
                      int management_type);  // 항목별 내역 확인
 void searchPrice(Record *r[], int count,
                  int management_category);  // 금액별 내역 확인
-void printPaymentMethod(Record *r[], int count,
+void printPaymentMethod(Record *r[], int count, int cat,
                         int paymentmethod);  // 결제수단별 내역 확인
 
 // 불러오기 및 저장

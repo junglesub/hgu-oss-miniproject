@@ -245,12 +245,12 @@ void searchPrice(Record *r[], int count, int management_category) {
   printf("\n");
 }
 
-void printPaymentMethod(Record *r[], int count, int paymentmethod) {
+void printPaymentMethod(Record *r[], int count, int cat, int paymentmethod) {
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
-    if (r[i]->paymentMethod != paymentmethod) continue;
+    if (r[i]->category != cat || r[i]->paymentMethod != paymentmethod) continue;
     printf(
         "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
         r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],

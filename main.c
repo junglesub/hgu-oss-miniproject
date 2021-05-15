@@ -77,12 +77,14 @@ int main(void) {
         }
         break;
       case 9:
+        printf("검색하고자 하는 category는? (수입:0 지출:1) ");
+        scanf("%d", &no);  // no 는 category
         printf(
             "검색하고 싶은 결제수단은? (현금:0, 카드:1, 계좌이체:2, 휴대폰:3, "
             "상품권:4, "
             "기타:5) ");
-        scanf("%d", &no);
-        printPaymentMethod(r, count, no);
+        scanf("%d", &no2);
+        printPaymentMethod(r, count, no, no2);
         break;
       case 10:
         listRecord(r, count);
