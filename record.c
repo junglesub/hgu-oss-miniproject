@@ -186,17 +186,18 @@ void listRecord(Record *r[], int count) {
   }
 }
 
-void printMonthRecords(Record *r[], int count, char *yearmonth) {
-    printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+void printMonthRecords(Record *r[], int count, int cat, char *yearmonth) {
+  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+  printf(
+      "===================================================================\n");
+  for (int i = 0; i < count; i++) {
+    if (cat != r[i]->category || strncmp(yearmonth, r[i]->date, 7) != 0)
+      continue;
     printf(
-          "===================================================================\n");
-      for (int i = 0; i < count; i++) {
-        if (strncmp(yearmonth, r[i]->date, 7) != 0) continue;
-          printf(
-            "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
-            r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
-            r[i]->price, paymentMethod[r[i]->paymentMethod]);
-      }
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+  }
 }
 
 void searchBreakdown(Record *r[], int count, int management_category,
@@ -215,27 +216,32 @@ void searchBreakdown(Record *r[], int count, int management_category,
   }
 }
 
-void searchPrice(Record *r[], int count, int management_category){
+void searchPrice(Record *r[], int count, int management_category) {
   int scnt = 0;
   int min_price, max_price;
 
-  while(1){
-    printf("검색하고 싶은 기록의 금액대는? \n=> minimum price, maximum price를 차례대로 입력하세요 : "); 
+  while (1) {
+    printf(
+        "검색하고 싶은 기록의 금액대는? \n=> minimum price, maximum price를 "
+        "차례대로 입력하세요 : ");
     scanf("%d %d", &min_price, &max_price);
-    if(min_price <= max_price) break;
+    if (min_price <= max_price) break;
   }
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
-  printf("===================================================================\n");
-  for(int i=0; i<count; i++){
-    if(r[i]->category != management_category) continue;
-    if(r[i]->price >= min_price && r[i]->price <= max_price){
-      printf("%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
-        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
-        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+  printf(
+      "===================================================================\n");
+  for (int i = 0; i < count; i++) {
+    if (r[i]->category != management_category) continue;
+    if (r[i]->price >= min_price && r[i]->price <= max_price) {
+      printf(
+          "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date,
+          category[r[i]->category],
+          r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+          r[i]->price, paymentMethod[r[i]->paymentMethod]);
       scnt++;
-    } 
+    }
   }
-  if(scnt == 0) printf("=> 원하는 가격대의 기록이 없습니다!");
+  if (scnt == 0) printf("=> 원하는 가격대의 기록이 없습니다!");
   printf("\n");
 }
 
