@@ -36,29 +36,35 @@ int createRecord(Record *r[], int count) {
   return 1;
 }
 
-void readRecord(Record *r[], int count, int readIndex) {
-  // 읽으려고 하는 아이템이 총 저장된 갯수보다 많거나 같으면 오류 메세지 출력.
-  if (count <= readIndex) {
-    printf("[ERROR] Attempting to Read out of index\n");  // 애러 메세지 출력
-    return;  // 해당 함수 종료
-  }
-
-  // 지정된 인덱스가 이미 삭제 되었거나 존재하지 않을경우.
-  if (r[readIndex] == NULL) {
-    printf("[ERROR] 존재하지 않는 인덱스입니다.\n");  // 애러 메세지 출력
-    return;                                           // 해당 함수 종료
-  }
-
-  // 아래는 출력할 내용들.
-  printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
-  printf(
-      "===================================================================\n");
-  printf("%d\t%s\t%s\t%s\t%d\t%s\n", readIndex, r[readIndex]->date,
-         category[r[readIndex]->category],
-         r[readIndex]->category % 2 == 0 ? inc_type[r[readIndex]->type]
-                                         : exp_type[r[readIndex]->type],
-         r[readIndex]->price, paymentMethod[r[readIndex]->paymentMethod]);
+void readRecord(Record *r, int index) {
+  printf("%d\t%s\t%s\t%s\t%d\t%s\n", index, r->date, category[r->category],
+         r->category % 2 == 0 ? inc_type[r->type] : exp_type[r->type], r->price,
+         paymentMethod[r->paymentMethod]);
 }
+
+// void readRecord(Record *r[], int count, int readIndex) {
+//   // 읽으려고 하는 아이템이 총 저장된 갯수보다 많거나 같으면 오류 메세지
+//   출력. if (count <= readIndex) {
+//     printf("[ERROR] Attempting to Read out of index\n");  // 애러 메세지 출력
+//     return;  // 해당 함수 종료
+//   }
+
+//   // 지정된 인덱스가 이미 삭제 되었거나 존재하지 않을경우.
+//   if (r[readIndex] == NULL) {
+//     printf("[ERROR] 존재하지 않는 인덱스입니다.\n");  // 애러 메세지 출력
+//     return;                                           // 해당 함수 종료
+//   }
+
+//   // 아래는 출력할 내용들.
+//   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
+//   printf(
+//       "===================================================================\n");
+//   printf("%d\t%s\t%s\t%s\t%d\t%s\n", readIndex, r[readIndex]->date,
+//          category[r[readIndex]->category],
+//          r[readIndex]->category % 2 == 0 ? inc_type[r[readIndex]->type]
+//                                          : exp_type[r[readIndex]->type],
+//          r[readIndex]->price, paymentMethod[r[readIndex]->paymentMethod]);
+// }
 
 int updateRecord(Record *r[], int updIndex) {
   printf("기록 내역을 업데이트하겠습니다.\n");
@@ -179,10 +185,7 @@ void listRecord(Record *r[], int count) {
   printf(
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
-    printf(
-        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
-        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
-        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+    readRecord(r[i], i + 1);
   }
 }
 
@@ -209,10 +212,7 @@ void searchBreakdown(Record *r[], int count, int management_category,
     if (!(r[i]->category == management_category &&
           r[i]->type == management_type))
       continue;
-    printf(
-        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
-        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
-        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+    readRecord(r[i], count + 1);
   }
 }
 

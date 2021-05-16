@@ -22,9 +22,7 @@ int main(void) {
         break;
       case 2:
         // read
-        no = selectDataNo(r, count);
-        if (no == 0) break;
-        readRecord(r, count, no - 1);
+        listRecord(r, count);
         break;
       case 3:
         // Update
@@ -85,9 +83,6 @@ int main(void) {
             "기타:5) ");
         scanf("%d", &no2);
         printPaymentMethod(r, count, no, no2);
-        break;
-      case 10:
-        listRecord(r, count);
         break;
       default:
         printf("잘못된 선택!\n");

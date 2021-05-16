@@ -13,7 +13,8 @@ typedef struct {
 
 // CRUD
 int createRecord(Record *r[], int count);
-void readRecord(Record *r[], int count, int readIndex);
+// void readRecord(Record *r[], int count, int readIndex);
+void readRecord(Record *r, int index);
 int updateRecord(Record *r[], int updIndex);
 void deleteRecord(Record *r[], int *count, int delIndex);
 
