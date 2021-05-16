@@ -189,13 +189,17 @@ void listRecord(Record *r[], int count) {
   }
 }
 
-void printMonthRecords(Record *r[], int count, char *yearmonth) {
+void printMonthRecords(Record *r[], int count, int cat, char *yearmonth) {
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
-    if (strncmp(yearmonth, r[i]->date, 7) != 0) continue;
-    readRecord(r[i], i + 1);
+    if (cat != r[i]->category || strncmp(yearmonth, r[i]->date, 7) != 0)
+      continue;
+    printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
   }
 }
 
@@ -229,7 +233,11 @@ void searchPrice(Record *r[], int count, int management_category) {
   for (int i = 0; i < count; i++) {
     if (r[i]->category != management_category) continue;
     if (r[i]->price >= min_price && r[i]->price <= max_price) {
-      readRecord(r[i], count + 1);
+      printf(
+          "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date,
+          category[r[i]->category],
+          r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+          r[i]->price, paymentMethod[r[i]->paymentMethod]);
       scnt++;
     }
   }
@@ -237,12 +245,15 @@ void searchPrice(Record *r[], int count, int management_category) {
   printf("\n");
 }
 
-void printPaymentMethod(Record *r[], int count, int paymentmethod) {
+void printPaymentMethod(Record *r[], int count, int cat, int paymentmethod) {
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
-    if (r[i]->paymentMethod != paymentmethod) continue;
-    readRecord(r[i], count + 1);
+    if (r[i]->category != cat || r[i]->paymentMethod != paymentmethod) continue;
+    printf(
+        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
+        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
+        r[i]->price, paymentMethod[r[i]->paymentMethod]);
   }
 }
