@@ -101,7 +101,7 @@ void saveRecord(Record *r[], int count) {
             r[i]->price, r[i]->paymentMethod);
   }
   fclose(fp);
-  printf("record.txt 파일에 기록이 저장되었습니다!\n");
+  printf("\nrecord.txt 파일에 기록이 저장되었습니다!\n");
 }
 
 int loadRecord(Record *r[]) {
@@ -124,7 +124,7 @@ int loadRecord(Record *r[]) {
     fscanf(fp, "%d\n", &r[i]->paymentMethod);
   }
   fclose(fp);
-  printf("record.txt 파일 기록을 읽어왔습니다!\n");
+  printf("\nrecord.txt 파일 기록을 읽어왔습니다!\n");
   return i;
 }
 
