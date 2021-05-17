@@ -42,30 +42,6 @@ void readRecord(Record *r, int index) {
          paymentMethod[r->paymentMethod]);
 }
 
-// void readRecord(Record *r[], int count, int readIndex) {
-//   // 읽으려고 하는 아이템이 총 저장된 갯수보다 많거나 같으면 오류 메세지
-//   출력. if (count <= readIndex) {
-//     printf("[ERROR] Attempting to Read out of index\n");  // 애러 메세지 출력
-//     return;  // 해당 함수 종료
-//   }
-
-//   // 지정된 인덱스가 이미 삭제 되었거나 존재하지 않을경우.
-//   if (r[readIndex] == NULL) {
-//     printf("[ERROR] 존재하지 않는 인덱스입니다.\n");  // 애러 메세지 출력
-//     return;                                           // 해당 함수 종료
-//   }
-
-//   // 아래는 출력할 내용들.
-//   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
-//   printf(
-//       "===================================================================\n");
-//   printf("%d\t%s\t%s\t%s\t%d\t%s\n", readIndex, r[readIndex]->date,
-//          category[r[readIndex]->category],
-//          r[readIndex]->category % 2 == 0 ? inc_type[r[readIndex]->type]
-//                                          : exp_type[r[readIndex]->type],
-//          r[readIndex]->price, paymentMethod[r[readIndex]->paymentMethod]);
-// }
-
 int updateRecord(Record *r[], int updIndex) {
   printf("기록 내역을 업데이트하겠습니다.\n");
 
@@ -156,7 +132,7 @@ int selectMenu(void) {
   int sel;
   printf("\n===== 가계부 프로그램 =====\n");
   printf("1. 기록 추가\n");
-  printf("2. 특정 기록 조회\n");
+  printf("2. 모든 기록 조회\n");
   printf("3. 기록 업데이트\n");
   printf("4. 기록 삭제\n");
   printf("5. 파일 저장\n");
@@ -164,7 +140,6 @@ int selectMenu(void) {
   printf("7. 항목별 내역 검색\n");
   printf("8. 금액별 내역 검색\n");
   printf("9. 결제수단별 내역 검색\n");
-  printf("10. 전체 기록 조회\n");
   printf("0. 종료\n");
   printf("=> 원하는 메뉴는? ");
 
