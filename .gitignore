@@ -142,11 +142,8 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,visualstudiocode,c
 record
 
-# record 실행파일
-record
-ledger
-
 #기타
+ledger
 record.txt
 tempCodeRunnerFile
 tempCodeRunner.h 
