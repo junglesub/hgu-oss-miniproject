@@ -132,7 +132,7 @@ int selectMenu(void) {
   int sel;
   printf("\n===== 가계부 프로그램 =====\n");
   printf("1. 기록 추가\n");
-  printf("2. 특정 기록 조회\n");
+  printf("2. 모든 기록 조회\n");
   printf("3. 기록 업데이트\n");
   printf("4. 기록 삭제\n");
   printf("5. 파일 저장\n");
@@ -140,7 +140,6 @@ int selectMenu(void) {
   printf("7. 항목별 내역 검색\n");
   printf("8. 금액별 내역 검색\n");
   printf("9. 결제수단별 내역 검색\n");
-  printf("10. 전체 기록 조회\n");
   printf("0. 종료\n");
   printf("=> 원하는 메뉴는? ");
 
