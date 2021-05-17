@@ -1,13 +1,13 @@
-#include "record.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include "record.h"
+
 char category[][20] = {"수입", "지출"};
+char inc_type[][20] = {"근로소득", "금융소득", "기타"};
 char exp_type[][20] = {"\t식비",     "\t월세",   "\t공과금", "교통/통신비",
                        "문화생활비", "\t교육비", "\t저축",   "\t기타지출"};
-char inc_type[][20] = {"근로소득", "금융소득", "기타"};
 char paymentMethod[][20] = {"현금",   "카드",   "계좌이체",
                             "휴대폰", "상품권", "기타"};
 
@@ -36,8 +36,8 @@ int createRecord(Record *r[], int count) {
   return 1;
 }
 
-void readRecord(Record *r, int index) {
-  printf("%d\t%s\t%s\t%s\t%d\t%s\n", index, r->date, category[r->category],
+void readRecord(Record *r, int redIndex) {
+  printf("%d\t%s\t%s\t%s\t%d\t%s\n", redIndex, r->date, category[r->category],
          r->category % 2 == 0 ? inc_type[r->type] : exp_type[r->type], r->price,
          paymentMethod[r->paymentMethod]);
 }
@@ -82,7 +82,7 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
 
   // 해당 인덱스 위치 삭제
   free(r[delIndex]);   // 해당 메모리 공간 비우기.
-  r[delIndex] = NULL;  //
+  r[delIndex] = NULL;  
 
   // 끌어오기 기능
   for (int i = delIndex; i < *count - 1; i++) {
@@ -95,22 +95,22 @@ void deleteRecord(Record *r[], int *count, int delIndex) {
 
 void saveRecord(Record *r[], int count) {
   FILE *fp;
-  fp = fopen("Record.txt", "wt");
+  fp = fopen("record.txt", "wt");
   for (int i = 0; i < count; i++) {
     fprintf(fp, "%s %d %d %d %d\n", r[i]->date, r[i]->category, r[i]->type,
             r[i]->price, r[i]->paymentMethod);
   }
   fclose(fp);
-  printf("Record.txt 파일에 기록이 저장되었습니다!\n");
+  printf("record.txt 파일에 기록이 저장되었습니다!\n");
 }
 
 int loadRecord(Record *r[]) {
   int i = 0;
   FILE *fp;
-  fp = fopen("Record.txt", "rt");
+  fp = fopen("record.txt", "rt");
 
   if (fp == NULL) {
-    printf("Record.txt 파일이 없습니다!\n");
+    printf("\nrecord.txt 파일이 없습니다!\n");
     return 0;
   }
 
@@ -124,7 +124,7 @@ int loadRecord(Record *r[]) {
     fscanf(fp, "%d\n", &r[i]->paymentMethod);
   }
   fclose(fp);
-  printf("Record.txt 파일 기록을 읽어왔습니다!\n");
+  printf("record.txt 파일 기록을 읽어왔습니다!\n");
   return i;
 }
 
@@ -132,7 +132,7 @@ int selectMenu(void) {
   int sel;
   printf("\n===== 가계부 프로그램 =====\n");
   printf("1. 기록 추가\n");
-  printf("2. 모든 기록 조회\n");
+  printf("2. 전체 기록 조회\n");
   printf("3. 기록 업데이트\n");
   printf("4. 기록 삭제\n");
   printf("5. 파일 저장\n");
@@ -164,7 +164,7 @@ void listRecord(Record *r[], int count) {
   }
 }
 
-void printMonthRecords(Record *r[], int count, int cat, char *yearmonth) {
+void searchMonth(Record *r[], int count, int cat, char *yearmonth) {
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
       "===================================================================\n");
@@ -175,7 +175,7 @@ void printMonthRecords(Record *r[], int count, int cat, char *yearmonth) {
   }
 }
 
-void searchBreakdown(Record *r[], int count, int management_category,
+void searchItem(Record *r[], int count, int management_category,
                      int management_type) {
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
@@ -184,7 +184,7 @@ void searchBreakdown(Record *r[], int count, int management_category,
     if (!(r[i]->category == management_category &&
           r[i]->type == management_type))
       continue;
-    readRecord(r[i], count + 1);
+    readRecord(r[i], i + 1);
   }
 }
 
@@ -213,7 +213,7 @@ void searchPrice(Record *r[], int count, int management_category) {
   printf("\n");
 }
 
-void printPaymentMethod(Record *r[], int count, int cat, int paymentmethod) {
+void searchPaymentMethod(Record *r[], int count, int cat, int paymentmethod) {
   printf("\nNo\tdate\t\tcategory\ttype\tprice\tpaymentMethod\n");
   printf(
       "===================================================================\n");
