@@ -205,11 +205,7 @@ void searchPrice(Record *r[], int count, int management_category) {
   for (int i = 0; i < count; i++) {
     if (r[i]->category != management_category) continue;
     if (r[i]->price >= min_price && r[i]->price <= max_price) {
-      printf(
-          "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date,
-          category[r[i]->category],
-          r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
-          r[i]->price, paymentMethod[r[i]->paymentMethod]);
+      readRecord(r[i], i + 1);
       scnt++;
     }
   }
@@ -223,9 +219,6 @@ void printPaymentMethod(Record *r[], int count, int cat, int paymentmethod) {
       "===================================================================\n");
   for (int i = 0; i < count; i++) {
     if (r[i]->category != cat || r[i]->paymentMethod != paymentmethod) continue;
-    printf(
-        "%d\t%s\t%s\t%s\t%d\t%s\n", i + 1, r[i]->date, category[r[i]->category],
-        r[i]->category % 2 == 0 ? inc_type[r[i]->type] : exp_type[r[i]->type],
-        r[i]->price, paymentMethod[r[i]->paymentMethod]);
+    readRecord(r[i], i + 1);
   }
 }
