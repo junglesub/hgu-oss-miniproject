@@ -33,7 +33,7 @@ void searchPaymentMethod(Record *r[], int count, int cat,
 
 // 기타
 int selectMenu(); // 메뉴 선택
-int selectDataNo(Record *r[], int count); // 특정 기록 인덱스 선택 
+int selectDataNo(Record *r[], int count); // 특정 기록 번호 선택 
 void listRecord(Record *r[], int count); // 전체 기록 조회
 
 #endif
